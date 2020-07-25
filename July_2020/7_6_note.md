@@ -57,7 +57,7 @@ ev_timer_start(loop, &conn_io->my_timer);
     while (quiche_stream_iter_next(readable, &s))
       recv_len = quiche_conn_stream_recv()
       if (recv_len > 0) break;
-      
+    
 - struct sockaddr_storage peer_addr;
   socklen_t peer_addr_len = sizeof(peer_addr);
   memset(&peer_addr, 0, peer_addr_len);
@@ -72,7 +72,7 @@ ev_timer_start(loop, &conn_io->my_timer);
 ```
 $ ffmpeg -i inputfile out.aac
 ```
- 
+
 # quiche-pipe
 ## quic + single stream
 - create 4 pipes
@@ -88,6 +88,7 @@ $ ffplay -i cvideopipe
 $ FFREPORT=file=ffplay_repo.log:level=16 ffplay -i cvideopipe 
 $ FFREPORT=file=ffplay_repo.log:level=16 ffplay -i cvideopipe -infbuf
 $ FFREPORT=file=ffplay_repo_ori.log:level=16 ffplay -i cvideopipe -infbuf
+$ ./ffplay -i ~/Documents/quic_hevc/examples/cvideopipe -probesize 32
 ```
 - server send
 ```
@@ -101,6 +102,7 @@ $ ./client 127.0.0.1 1234
 ```
 $ ffmpeg -re -i ~/source.mp4 -codec copy -f mpegts pipe:1 > svideopipe
 $ ffmpeg -re -i ~/demo.ts -codec copy -f mpegts pipe:1 > svideopipe
+$ ffmpeg -re -i ~/test1.ts -codec copy -f mpegts pipe:1 > svideopipe
 ```
 notes: run the commands follow the oder, but run *client* and then quickly run *ffmpeg*, otherwise the connection will timeout.
 

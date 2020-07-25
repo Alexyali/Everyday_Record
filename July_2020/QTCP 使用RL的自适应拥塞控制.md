@@ -1,8 +1,9 @@
 # QTCP 使用RL的自适应拥塞控制
-`QTCP: Adaptive Congestion Control with Reinforcement Learning`
+`QTCP: Adaptive Congestion Control with Reinforcement Learning`  
+`IEEE TRANSACTIONS ON NETWORK SCIENCE AND ENGINEERING`
 
 ## Introduction
-- 本文基于RL设计了QTCP（基于Q-learning的TCP CC）自动决定最优的`cwnd`策略，根据在线观察网络环境。
+- 本文基于RL设计了QTCP（基于Q-learning的TCP CC），根据在线观察网络环境，自动决定最优的`cwnd`策略。
 - QTCP根据收集的网络参数，连续更新状态-动作组合，使用Q学习算法搜索最佳动作，比如如何调整cwnd，提高长期回报
 - 挑战：CC问题的连续高维状态空间，可能需要很大空间存储大量状态，训练也会更耗时。为了加速学习过程，采用了函数近似的方法，减少状态空间大小
 - 贡献1： 提出了QTCP，可以在线学习策略调整cwnd，达到高带宽低延迟
@@ -14,7 +15,9 @@
 - 无法学习历史信息，例如Reno可以根据网络情况在拥塞避免阶段加速cwnd的增加速度
 
 ## QTCP Overview
+- 应用Q-learning，一种传统RL算法处理拥塞控制问题。提出QTCP，可以允许发送端在与网络环境交互的过程中，学习最佳的cwnd调整策略
 - 发送端就是智能体，和网络环境互动，并采取一系列动作（调整cwnd）探索最优解。达到目标，如高带宽低延迟。
+- 交互环境特指TCP的拥塞避免阶段
 - QTCP的RL元素
 	- STATE：根据选择参数决定的网络状态
 		- avg_send 发送两个包的平均间隔
@@ -27,3 +30,9 @@
 	- 训练：采用Q-learning算法进行训练，这是一种时间差分方法
 - CC应用学习算法的关键是选择用于建模的大量状态组合
 - QTCP是第一个将RL应用于TCP拥塞控制的方法
+
+## Evaluation
+- 多种网络环境，使用ns-3仿真器
+- 比较三种方法：NewReno, QTCP-Baseline, QTCP-Generalization
+- 瓶颈带宽为40Mbps, QTCP达到了20Mbps
+- QTCP的最大带宽和Reno的最大带宽差不多，但是QTCP更稳定；QTCP的平均吞吐量略大于Reno，延迟更低
