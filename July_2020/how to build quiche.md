@@ -1,6 +1,8 @@
-# Build `quiche` 
+# Build *quiche*
+- `quiche` here comes from `cloudfare` without changes. if you want to build `quic_hevc`, you can jump to the next part 
 - build `quiche`
 - build `quiche/examples`
+
 ## install *rust*
 - install [rustup] (https://rustup.rs/)
 - install [curl]
@@ -10,22 +12,21 @@ $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 $ source $HOME/.cargo/env
 ```
 
-## quiche
-- download  *quiche*
-- `https://github.com/google/boringssl.git` (put *boringssl* into quiche/deps/)
+## download *quiche*
+- it will clone `https://github.com/google/boringssl.git` automatically  (put *boringssl* into quiche/deps/)
 ```
 $ git clone --recursive https://github.com/cloudflare/quiche
 $ cd quiche/
 $ cargo build --examples
 ```
 
-## libev
+## install *libev*
 ```
 $ sudo apt-get update -y
 $ sudo apt-get install -y libev-dev
 ```
 
-## uthash
+## *uthash*
 - download `uthash` in main folder
 - copy *uthash.h* to `quiche/examples/`
 ```
@@ -43,7 +44,9 @@ $ make clean
 $ make
 ```
 
-# Build `quic_hevc_0.3.0-pipe` 
+# Build *quic_hevc_0.3.0-pipe*
+- `quic_hevc_0.3.0-pipe` use pipe to deliever video data, created by `spartazhc` 
+-  if you start here, you also need install `rust` for build `quiche`, `libev` and `uthash` for build `examples`
 
 ## download
 - download git (need username and password)
@@ -86,7 +89,7 @@ $ make clean
 $ make
 ```
 
-## run quic
+## run *quic_hevc*
 - in `examples` folder
 - create `pipe` for send and receive
 - if successed, it will establish connection and transmit some packets
@@ -99,7 +102,7 @@ $ ./server 127.0.0.1 1234
 $ ./client 127.0.0.1 1234
 ```
 
-## test quic with video stream
+## test *quic_hevc* with video stream
 - you should first prepare a video file, such as `input.ts` in `quic_hevc/examples/`
 - just use `svideopipe` for server, and `cvideopipe` for client
 - you should open four terminal in `quic_hevc/examples/` to run 4 cmds shown below
