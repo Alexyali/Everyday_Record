@@ -38,6 +38,7 @@ $ cp uthash.h ~/quiche/examples/
 ## build *quiche/examples*
 - open terminal in `quiche/examples/`
 ```
+$ cd ~/quiche/examples/
 $ make clean
 $ make
 ```
@@ -48,6 +49,7 @@ $ make
 - download git (need username and password)
 - switch branch to `hecv-0.3.0-pipe`
 ```
+$ cd ~
 $ git clone http://202.120.39.171/spartazhc/quic_hevc.git
 $ cd quic_hevc/
 $ git checkout hevc-0.3.0-pipe
@@ -58,7 +60,7 @@ $ git checkout hevc-0.3.0-pipe
 - download `boringssl` in `quic_hevc/deps`
 ```
 $ sudo apt install cargo
-$ cd deps/
+$ cd ~/quic_hevc/deps/
 $ rm -rf boringssl/
 $ git clone https://github.com/google/boringssl.git
 $ cd ../
