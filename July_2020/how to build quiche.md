@@ -15,6 +15,7 @@ $ source $HOME/.cargo/env
 - `https://github.com/google/boringssl.git` (put *boringssl* into quiche/deps/)
 ```
 $ git clone --recursive https://github.com/cloudflare/quiche
+$ cd quiche/
 $ cargo build --examples
 ```
 
@@ -25,16 +26,17 @@ $ sudo apt-get install -y libev-dev
 ```
 
 ## uthash
-- `https://github.com/troydhanson/uthash.git`
+- download `uthash` in main folder
 - copy *uthash.h* to `quiche/examples/`
 ```
+$ cd ~
 $ git clone https://github.com/troydhanson/uthash.git
-$ cd uthash
-$ cd src
+$ cd uthash/src/
 $ cp uthash.h ~/quiche/examples/
 ```
 
 ## build *quiche/examples*
+- open terminal in `quiche/examples/`
 ```
 $ make clean
 $ make
@@ -43,7 +45,7 @@ $ make
 # Build `quic_hevc_0.3.0-pipe` 
 
 ## download
-- download git
+- download git (need username and password)
 - switch branch to `hecv-0.3.0-pipe`
 ```
 $ git clone http://202.120.39.171/spartazhc/quic_hevc.git
