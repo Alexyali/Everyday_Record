@@ -82,14 +82,29 @@ $ make clean
 $ make
 ```
 
-## run
+## run quic
 - in `examples` folder
 - create `pipe` for send and receive
+- if successed, it will establish connection and transmit some packets
 ```
 $ mkfifo svideopipe
+$ mkfifo cvideopipe
 $ mkfifo saudiopipe
 $ mkfifo caudiopipe
-$ mkfifo cvideopipe
 $ ./server 127.0.0.1 1234
 $ ./client 127.0.0.1 1234
+```
+
+## test quic with video stream
+- you should first prepare a video file, such as `input.ts` in `quic_hevc/examples/`
+- just use `svideopipe` for server, and `cvideopipe` for client
+- you should open four terminal in `quic_hevc/examples/` to run 4 cmds shown below
+- first open `ffplay` to receive from cvideopipe
+- then start `server`
+- then use `client`, and use ffmpeg to push stream as fast as possible
+```
+$ ffplay -i cvideopipe
+$ ./server 127.0.0.1 1234
+$ ./client 127.0.0.1 1234
+$ ffmpeg -re -i input.ts -codec copy -f mpegts pipe:1 > svideopipe
 ```
