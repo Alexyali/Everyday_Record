@@ -106,11 +106,11 @@ $ ./client 127.0.0.1 1234
 - you should first prepare a video file, such as `input.ts` in `quic_hevc/examples/`
 - just use `svideopipe` for server, and `cvideopipe` for client
 - you should open four terminal in `quic_hevc/examples/` to run 4 cmds shown below
-- first open `ffplay` to receive from cvideopipe
+- first open `ffplay` to receive from cvideopipe, use`-infbuf` for reading live stream 
 - then start `server`
 - then use `client`, and use ffmpeg to push stream as fast as possible
 ```
-$ ffplay -i cvideopipe
+$ ffplay -i cvideopipe -infbuf
 $ ./server 127.0.0.1 1234
 $ ./client 127.0.0.1 1234
 $ ffmpeg -re -i input.ts -codec copy -f mpegts pipe:1 > svideopipe
