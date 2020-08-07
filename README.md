@@ -9,3 +9,7 @@ git push -u origin master
 ```
 git pull origin master
 ```
+- 将远程指定分支拉取到本地当前分支
+```
+git pull origin <branch name>
+```
