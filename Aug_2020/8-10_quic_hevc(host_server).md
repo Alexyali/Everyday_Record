@@ -77,19 +77,27 @@ ADD_DEFINITIONS(-g -Wall)
 ## 修改后的CMakeList
 - located in `quiche/`
 ```
+# cmake version
 cmake_minimum_required(VERSION 3.5)
+
 # set project name
 project(quiche_module)
+
 # extra flags for gcc compiler
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I. -Wall -Werror -pedantic -fsanitize=address -g")
+
 # include dir of head files
 include_directories(include)
+
 # link dir of libs
 link_directories(examples/build/debug)
+
 # find Threads package
 find_package(Threads REQUIRED)
+
 # generate executable file
 add_executable(server ${PROJECT_SOURCE_DIR}/examples/server.c)
+
 # link target with libs
 target_link_libraries(server
 	quiche
@@ -97,6 +105,7 @@ target_link_libraries(server
         dl
 	Threads::Threads
 	)
+
 # the same as server
 add_executable(client ${PROJECT_SOURCE_DIR}/examples/client.c)
 target_link_libraries(client
