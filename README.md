@@ -13,3 +13,13 @@ git pull origin master
 ```
 git pull origin <branch name>
 ```
+
+## ssh and scp
+- use `ssh` to connect to server
+```
+$ ssh <usr_name>@<ip_addr>
+```
+- use `scp` to send file to server, open terminal in local machine
+```
+$ scp <local_file_addr> <usr_name>@<ip_addr>:<remote_addr>
+```

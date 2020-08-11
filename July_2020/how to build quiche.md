@@ -122,12 +122,12 @@ $ ./client 127.0.0.1 1234
 $ ffmpeg -re -i ~/4k_h264.ts -codec copy -f mpegts pipe:1 > svideopipe
 ```
 
-## ssh and scp
-- use `ssh` to connect to server
+## create an individual quiche module
+- ensure execute `cargo build --examples` in **quic_hevc** folder and `make` in **examples** folder as shown above
+- just need copy **examples, include** two folder into your project 
+- edit `Makefile` in **examples**, and invalid THREE rows
 ```
-$ ssh <usr_name>@<ip_addr>
-```
-- use `scp` to send file to server, open terminal in local machine
-```
-$ scp <local_file_addr> <usr_name>@<ip_addr>:<remote_addr>
+#SOURCE_DIR = ../src
+#$(LIB_DIR)/libquiche.a: $(shell find $(SOURCE_DIR) -type f -name '*.rs')
+#       cd .. && cargo build --target-dir $(BUILD_DIR)
 ```
