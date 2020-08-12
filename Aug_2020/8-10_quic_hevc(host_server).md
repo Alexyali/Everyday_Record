@@ -8,6 +8,8 @@
 
 ## 对接编码器
 - 编码器会输出每一帧的码流，假设存在Data_Pack内，从里面解析出码流数据，存入buffer中，直接送给server发送
+- 新建一个quiche类
+- 在不同线程之间传递参数，将`server`的建立连接信息传入`Data_Generator`
 
 ## 下一步任务
 - 学会makefile
@@ -115,3 +117,36 @@ target_link_libraries(client
         Threads::Threads
         )
 ```
+
+## 8-12 todo and done
+- 已经在`my_host_linux`中编译`quiche`，可以同时运行编码器和服务端
+- 需要在`SERVER`类和其他类的函数之间传递参数
+	- 关于静态变量和静态函数的问题
+	- quiche的函数都是静态函数，无法给类的变量赋值
+	- 使用信号量而不是类的成员变量在进程之间传递信息
+
+## C++ 类
+- `private`用来指定私有成员，只能在该类的成员函数内部访问
+- `public`用于指定公有成员，在任何地方都可以访问
+- 在类中，静态成员可以实现多个对象之间的数据共享
+- 静态成员函数没有this指针，不能返回非静态成员
+
+## 在SERVER增加conn_flag变量
+- Create connection flags in class `SERVER` to deliever status, located in `Quiche_Server.h`
+```
+class SERVER{
+public:
+	static int conn_flag
+	}
+```
+- inital `conn_flag` in `Quiche_Server.cpp`, located in the outside of functions
+```
+int SERVER::conn_flag = 0;
+```
+- set `conn_flag = 1` when `quiche_conn_is_established`
+- use `SERVER::conn_flag` in `Data_Generator.cpp` to control start
+
+## 问题
+- 输出台有很多个new connection, 怀疑重复调用了很多次
+
+
