@@ -31,8 +31,9 @@ hello: main.o hello.o
 - BUILD_DIR = $(CURDIR)/build 当前目录下的build文件夹
 - LIB_DIR 静态库
 - INCLUDE_DIR 包含目录
-- CFLAGS 给C编译器额外的标志
-- LDFLAGS 当编译器应该调用链接程序时，会给它们额外的标志
+- CFLAGS 指定头文件的路径
+- LDFLAGS 指定库文件的位置
+- LIBS 告诉链接器要链接哪些库文件
 - CC 编译C程序的程序，默认是`cc`
 - $@ 是要制作的文件的名称
 - $< 引起操作的相关文件的名称
@@ -148,5 +149,21 @@ int SERVER::conn_flag = 0;
 
 ## 问题
 - 输出台有很多个new connection, 怀疑重复调用了很多次
+- 原因：CMakeList的问题，可能没有包括ssl的库，导致quiche的tls部分出错
+- 办法：修改quiche module的CMakeLists，最后的结果应该和Makefile编译的运行一致
+
+## 8-13 测试
+- 修改`target_link_libraries`中crypto, ssl的位置到quiche之前
+-`ldd file..`打印共享对象依赖关系
+- 在github/quiche上发布issue `#617`
+- `build_cmake/CMakeFiles/client.dir/link.txt` 查看cmake的编译信息
+- 问题原因：`cert.crt`和`cert.key`没有在`build_cmake`文件夹内
+
+## my_host_linux && server
+### done
+- my_host_linux can compile quiche libraries
+- add a new thread in main.cpp to run server
+- set define  SIMULATE to control read video from file or true stream 
+
 
 

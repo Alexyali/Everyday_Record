@@ -27,13 +27,9 @@ $ sudo apt-get install -y libev-dev
 ```
 
 ## *uthash*
-- download `uthash` in main folder
-- copy *uthash.h* to `quiche/examples/`
+- download `uthash` 
 ```
-$ cd ~
-$ git clone https://github.com/troydhanson/uthash.git
-$ cd uthash/src/
-$ cp uthash.h ~/quiche/examples/
+$ sudo apt-get install uthash-dev
 ```
 
 ## build *quiche/examples*
@@ -80,10 +76,7 @@ $ cargo build --examples
 ```
 
 - build `examples`
-- copy `uthash.h` to `examples` folder
 ```
-$ cd ~/uthash/src/
-$ cp uthash.h ~/quic_hevc/examples/
 $ cd ~/quic_hevc/examples/
 $ make clean
 $ make
