@@ -112,7 +112,7 @@ $ ffplay -i cvideopipe -infbuf
 $ ffplay -i cvideopipe -infbuf -probesize 32
 $ ./server 127.0.0.1 1234
 $ ./client 127.0.0.1 1234
-$ ffmpeg -re -i ~/4k_h264.ts -codec copy -f mpegts pipe:1 > svideopipe
+$ ffmpeg -re -i ~/demo.ts -codec copy -f mpegts pipe:1 > svideopipe
 ```
 
 ## create an individual quiche module
