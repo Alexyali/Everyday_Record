@@ -23,7 +23,7 @@
   - 判断Buffer是否空，如果是，`usleep`直到Buffer非空
   - 判断`cur_size < buf_len`如果是，则说明取出的数据太多，不允许取出。可以`usleep`循环直到判断否
   - `try_lock`，可以使用`while`和`usleep`的组合直到成功lock。
-  - 判断`head+buf_len>max_size`如果是，说明数据需要分两段取出。首先`memcpy(buf,data+head,max_size-head)`，其次`memcpy(buf,data,head+buf_len-max_size)`. 令`head = head+buf_len-max_size`, `cur_size -= buf_len`. 如果判断否，说明数据可以一次性取出`memcpy(buf,data+head,buf_len)`, 令`head+=buf_len`, `cur_size-=buf_len`.
+  - 判断`head+buf_len>max_size`如果是，说明数据需要分两段取出。首先`memcpy(buf,data+head,max_size-head)`，其次`memcpy(buf+max_size-head,data,head+buf_len-max_size)`. 令`head = head+buf_len-max_size`, `cur_size -= buf_len`. 如果判断否，说明数据可以一次性取出`memcpy(buf,data+head,buf_len)`, 令`head+=buf_len`, `cur_size-=buf_len`.
 
 - 判断空`is_empty()`
 

@@ -44,4 +44,30 @@ $ git push <remote_name>/`orign master` --force
 # get into Gitlab website and click `protect`
 ```
 
-  
+- `Gitlab`本地和fork的远程仓库同步，但是和远程主仓库不同步
+```c++
+# create two branch in local, one to follow remote orign, and 
+# another to follow remote forked. 
+# copy local master branch to a new branch, host_server is its name
+$ git checkout -b host_server
+# reset local master branch to last commit version if needed
+# use `git log` to find commit id
+$ git checkout master
+$ git reset --hard <commit_id>
+# synchronize local master with remote origin master
+$ git pull origin master
+# now you have two local branch, and master follows origin master
+# if you want to let remote fork follow host_server, you can
+$ git checkout host_server
+$ git push myfork host_server:master
+# now you want to edit host_server based on master
+$ git checkout host_server
+$ git rebase master
+# use git status to find corruption files and fix them
+$ git status
+# after edit one file successfully, you need continue to fix next
+$ git add <file_name>
+$ git rebase --continue
+# if you do not want to rebase, you can use abort to return 
+$ git rebase --abort
+```
