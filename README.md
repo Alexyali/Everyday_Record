@@ -23,3 +23,10 @@ $ ssh <usr_name>@<ip_addr>
 ```
 $ scp <local_file_addr> <usr_name>@<ip_addr>:<remote_addr>
 ```
+
+- use `scp` to download file from server to local
+
+```
+scp username@servername:/path/filename /tmp/local_destination
+```
+

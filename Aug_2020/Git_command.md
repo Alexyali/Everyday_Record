@@ -19,6 +19,8 @@
 - `git diff` to see detail of change in each edited file
 - `git branch -a` to see all branches
 - `git checkout <branch_name>` to switch to one certain branch
+- `git push origin --delete <branch name>` delete remote origin branch
+- `git branch -d <branch_name>` delete local branch
 
 ## Problems
 
@@ -70,4 +72,20 @@ $ git add <file_name>
 $ git rebase --continue
 # if you do not want to rebase, you can use abort to return 
 $ git rebase --abort
+```
+
+- git commit信息错误，撤销commit，但是保留更改
+```
+$ git reset --soft <commit_id>
+```
+
+- 修改当前提交的用户名和邮箱
+```
+$ git config user.name <name>
+$ git config user.email <email>
+```
+
+- 推送当前本地分支到远程分支
+```
+$ git push <remote> <local branch> : <remote branch>
 ```
