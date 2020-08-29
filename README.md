@@ -30,3 +30,9 @@ $ scp <local_file_addr> <usr_name>@<ip_addr>:<remote_addr>
 scp username@servername:/path/filename /tmp/local_destination
 ```
 
+- enc addr
+
+```
+172.16.7.84
+```
+

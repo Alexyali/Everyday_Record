@@ -85,7 +85,21 @@ $ git config user.name <name>
 $ git config user.email <email>
 ```
 
-- 推送当前本地分支到远程分支
+- push当前本地分支到远程分支
 ```
-$ git push <remote> <local branch> : <remote branch>
+$ git push <remote> <local branch>:<remote branch>
 ```
+
+- push本地分支覆盖远程分支
+
+```
+$ git push <remote> <local branch>:<remote branch> --force
+```
+
+- 拉取远程分支到本地并创建新分支
+
+```
+$ git checkout -b dev(local branch) origin/dev(remote branch)
+```
+
+
