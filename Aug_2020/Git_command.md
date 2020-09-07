@@ -102,4 +102,14 @@ $ git push <remote> <local branch>:<remote branch> --force
 $ git checkout -b dev(local branch) origin/dev(remote branch)
 ```
 
+- 需要删除某一次commit
+
+```
+# use `git log` to find the commit id just before need deleted one
+$ git rebase -i <commit id>
+# change `pick` to `drop` in the head of the commit you want to delete
+# press keyboard `ctrl + X` -> `Y` -> `Enter` to exit
+# if you make mistake and want to restore, use:
+$ git reabse --abort
+```
 
