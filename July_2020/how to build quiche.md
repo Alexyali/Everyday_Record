@@ -108,19 +108,10 @@ $ ffplay -i cvideopipe -infbuf
 - first open `ffplay` to receive from cvideopipe, use`-infbuf` for reading live stream, and add `-probesize 32` to decrease first open time 
 - then start `server`
 - then use `client`, and use ffmpeg to push stream as fast as possible
-```
+```c++
 $ ffplay -i cvideopipe -infbuf -probesize 32
 $ ./server 127.0.0.1 1234
 $ ./client 127.0.0.1 1234
 $ ffmpeg -re -i ~/demo.ts -codec copy -f mpegts pipe:1 > svideopipe
 ```
 
-## create an individual quiche module
-- ensure execute `cargo build --examples` in **quic_hevc** folder and `make` in **examples** folder as shown above
-- just need copy **examples, include** two folder into your project 
-- edit `Makefile` in **examples**, and invalid THREE rows
-```
-#SOURCE_DIR = ../src
-#$(LIB_DIR)/libquiche.a: $(shell find $(SOURCE_DIR) -type f -name '*.rs')
-#       cd .. && cargo build --target-dir $(BUILD_DIR)
-```
