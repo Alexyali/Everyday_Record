@@ -29,9 +29,19 @@ $ ntpdate -u 172.16.7.84
 #22 Sep 15:40:14 ntpdate: adjust time server 172.16.7.84 offset -0.032729 sec
 ```
 
-- master分支在同步前的端到端延迟为421ms, 同步后为397ms
+- master分支在同步前的端到端延迟为397ms, 同步后为374ms
+- 使用`clockdiff`检查两台主机的时间差，时间差在10-20ms左右
+
+```
+# at local machine
+$ sudo clockdiff 172.16.7.84
+# host=172.16.7.84 rtt=0(0)ms/0ms delta=13ms/12ms Tue Sep 22 16:56:22 2020
+```
+
+- master分支测试端到端延迟为368ms，fifo分支测试延迟为366ms
 
 ## 结论
 
 - pipe分支和master分支的总延迟基本一致
-- 目测端到端延迟大于理论延迟150ms左右，可能是两台电脑时间不同步以及采集时间
+- 两台机器的系统时间差在30ms内，因此测试的理论端到端延迟误差也在30ms内
+- 目测端到端延迟大于理论延迟100ms左右，具体原因需要进一步分析
