@@ -11,7 +11,7 @@ $ ssh enc@172.16.7.84
 - 克隆`my_host_linux` 并切换到`fifo`分支
 
 ```
-$ git clonehttp://202.120.39.171/medialab-cmic/my_host_linux.git
+$ git clone http://202.120.39.171/medialab-cmic/my_host_linux.git --recursive
 $ git checkout fifo
 ```
 
