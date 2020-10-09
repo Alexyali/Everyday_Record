@@ -35,10 +35,19 @@ $ cmake ..
 $ make
 ```
 
+- copy密钥到build文件夹下
+
+```
+$ cd build
+$ cp ../deps/quic-hevc/examples/cert.crt ./
+$ cp ../deps/quic-hevc/examples/cert.key ./
+```
+
 - 假设在enc上采集视频编码发送，本机local收数据并播放，则操作如下：
 
 ```
 # in enc, first step
+$ cd build
 $ ./my_host_linux
 
 # in local, make fifo, only once
@@ -46,9 +55,11 @@ $ cd deps/quic-hevc/examples
 $ mkfifo cvideopipe 
 
 # in local, second step
+# located in deps/quic-hevc/examples 
 $ ./ffplay cvideopipe -infbuf -probesize 32 -flags low_delay
 
 # in local, third step
+# located in deps/quic-hevc/examples 
 $ ./client 172.16.7.84 2345
 ```
 
