@@ -50,4 +50,4 @@ server 172.16.7.84
 ```
 
 - 执行完修改后退出保存，然后重启ntp服务`service ntp restart`
-- 在client上执行`ntp -p` 查看ntp服务是否配置完成
+- 在client上执行`ntpq -p` 查看ntp服务是否配置完成
