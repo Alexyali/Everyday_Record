@@ -13,4 +13,3 @@
 - stable_baselines: 
   - prerequisites: `sudo apt-get update && sudo apt-get install cmake libopenmpi-dev python3-dev zlib1g-dev`  
   - stable release: `pip install stable-baselines[mpi]`  
-- 
