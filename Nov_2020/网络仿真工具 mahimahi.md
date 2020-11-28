@@ -29,7 +29,13 @@ $ sudo apt-get install mahimahi
 - mm-delay [delay] ：增加delay大小的单向延迟
 - mm-loss uplink|downlink [rate] ：离开容器（uplink）或者进入容器（downlink）的丢包率
 - mm_onoff uplink|downlink [mean-on-time] [mean-off-time] ：容器的上行或者下行连接会断续，并且在连接和断开之间切换
+- mm-link：仿真链接。链接所在文件夹`/usr/share/mahimahi/traces`  
 
 ## 观察工具
 
 mm-meter [--meter-uplink] [--meter-downlink]
+
+## 如何使用mahimahi
+
+在已经运行mahimahi的终端输入`printenv`可以查看mahimahi容器对应的IP地址，用于双向测试。
+
