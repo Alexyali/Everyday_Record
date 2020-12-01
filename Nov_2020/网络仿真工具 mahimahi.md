@@ -37,5 +37,19 @@ mm-meter [--meter-uplink] [--meter-downlink]
 
 ## 如何使用mahimahi
 
-在已经运行mahimahi的终端输入`printenv`可以查看mahimahi容器对应的IP地址，用于双向测试。
+在已经运行mahimahi的终端输入`printenv`可以查看mahimahi容器对应的IP地址，用于双向测试。一般来说mahimahi容器对应的ip地址为`100.64.0.1`
+
+以pcc算法测试为例，首先运行接收端程序，开始监听
+
+```
+./pccserver recv 1234
+```
+
+然后使用mahimahi建立仿真网络环境，并同时运行发送端程序
+
+```
+mm-loss uplink 0.01 sh -c './pccclient send 100.64.0.1 1234'
+```
+
+`mm-loss uplink 0.01`为增加的丢包率为0.1仿真网络，后面的命令则是发送端程序
 
