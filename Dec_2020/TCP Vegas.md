@@ -28,6 +28,22 @@ TCP Vegas尝试保持网络中一定数量的排队数据。太多排队数据�
 
 Vegas和Reno在同一链路争夺带宽时，Reno最终会占据绝大部分带宽。因为Reno会尽量填满缓冲区，而Vegas则尽可能占据很小的缓冲空间。Reno填满缓存导致Ts迅速增加，为了保持Diff的稳定，Vegas的吞吐量R会迅速降低到非常小。因此Vegas在公网上竞争不过Reno，没有得到广泛部署。
 
+### Vegas算法理解
+
+$$
+Diff = R(T_s - T)
+$$
+
+首先网络吞吐量和RTT随飞行数据的增加的变化分为三个阶段：
+
+- app limit: inflight<BDP, 也可以理解为W<CT，此时RTT是最小值，吞吐量处于增加状态
+- buffer limit: BDP<inflight<BDP+Buffer，此时队列开始暂存数据包，吞吐量达到网络容量，RTT随inflight增加而增大
+- loss limit: inflight>BDP+Buffer, 此时队列内存已用完，出现丢包，网络拥塞严重
+
+处于app限制阶段时，Ts约等于T，因此Diff约为0，满足条件`Diff <= α`，因此需要增大cwnd；处于buffer限制阶段时，R=C不变，Ts不断增大，满足条件`Diff >= β`，因此需要减小cwnd。
+
+因此当一个连接中只有Vegas流时，通过控制Diff(就是队列存储数据大小)维持在一定区间，保证网络传输处于buffer限制阶段，在维持较低RTT的情况下，最大化网络吞吐量。
+
 ## Little law
 
 $$
