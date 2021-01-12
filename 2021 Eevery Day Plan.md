@@ -18,3 +18,16 @@
 
 - 看完UDT文档 ✔
 - 理解TCP Vegas算法 ✔
+
+### 1-8
+
+- 看完`Internet Congestion Control`第四章 ✔
+
+### 1-11
+
+- 测试TCP Reno Cubic BBR抗随机丢包性能 ✔
+- 测试UDT的CTCP模块 ✔
+
+### 1-12
+
+- 看完Vegas算法的程序实现 ✔

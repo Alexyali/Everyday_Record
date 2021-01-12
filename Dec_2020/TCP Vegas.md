@@ -44,6 +44,54 @@ $$
 
 因此当一个连接中只有Vegas流时，通过控制Diff(就是队列存储数据大小)维持在一定区间，保证网络传输处于buffer限制阶段，在维持较低RTT的情况下，最大化网络吞吐量。
 
+### 算法程序实现
+
+[frome linux kernel](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/net/ipv4/tcp_vegas.c)
+
+- vegas_enable()：启动算法
+
+- vegas_init()：初始化最小往返延迟baseRTT，并调用vegas_enable
+
+- tcp_vegas_pkts_acked()：采用最小值滤波得到minRTT（当前的端到端延迟=传输延迟+排队延迟）和baseRTT（最小往返延迟=传输延迟）
+
+- tcp_vegas_cong_avoid()：拥塞避免算法。只有当收集到足够多RTT样本时才采用Vegas，如果RTT计数小于2，则仍采用reno的拥塞避免。否则说明收集到足够的RTT样本值。计算当前RTT，目标窗口和Diff差值。
+
+  ```c++
+  // rtt is prop.delay + queue.delay
+  rtt = vegas->minRTT;
+  // target_cwnd = actual_rate * baseRTT
+  target_cwnd = tp->snd_cwnd * vegas->baseRTT / rtt;
+  // diff is the queue data
+  diff = tp->snd_cwnd * (rtt - vegas->baseRTT) / vegas->baseRTT;
+  ```
+
+  - 如果还处于慢启动阶段，判断diff是否大于gamma=1，如果是，说明开始排队，需要进入拥塞避免阶段：将当前cwnd设置为目标cwnd，并将ssthresh设置为当前cwnd。如果diff小于gamma，则说明还处于慢启动阶段。
+
+  ```c++
+  if (diff > gamma && tp->snd_cwnd <= tp->snd_ssthresh) {
+  	tp->snd_cwnd = min(tp->snd_cwnd, (u32)target_cwnd+1);
+  	tp->snd_ssthresh = tcp_vegas_ssthresh(tp);
+  }
+  else if (tp->snd_cwnd <= tp->snd_ssthresh) {
+  	tcp_slow_start(tp);
+  }
+  ```
+
+  - 如果已经进入拥塞避免阶段，也就是snd_cwnd > ssthresh，那么进入vegas调整阶段，如果diff > beta，说明排队数据太多，需要降低cwnd，并保持拥塞避免阶段。否则如果diff < alpha，说明排队数据太少，需要增大cwnd。如果diff在两者之间，不需要调整cwnd。
+
+  ```c++
+  if (diff > beta) {
+  	tp->snd_cwnd--;
+      tp->snd_ssthresh = tcp_vegas_ssthresh(tp);
+  }
+  else if (diff < alpha) {
+      tp->snd_cwnd++;
+  }
+  else { }
+  ```
+
+
+
 ## Little law
 
 $$
