@@ -36,9 +36,10 @@
 
 - 在pantheon中部署udt仓库 [1 day] ✔
 - 用Latex开始写论文初稿，完成Introduction, Related Work部分 [2 day]
-- 总结为移动蜂窝网络设计的拥塞控制算法的思路，包括Sprout, verus, propRate, ExLL, C2TCP, DeepCC [2 day]
+- 总结移动蜂窝网络下的拥塞控制算法：Sprout, verus, propRate, ExLL, C2TCP, DeepCC [2 day]
 
 ### 1-13
 
-- 在pantheon中部署udt
-- 在udt中实现reno
+- 在pantheon中部署udt ✔
+- 在udt中实现reno ✔
+- 测试cubic，vegas在不同缓冲大小下的性能 ✔
