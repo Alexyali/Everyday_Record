@@ -1,10 +1,10 @@
 # 2021 Eevery Day Plan
 
-### 1.5-1.10目标
+## 1.5-1.10目标
 
-- 看完`Internet Congestion Control`第二章、第四章 [2 days]
-- 看完UDT相关文档 [2 days]
-- 实现基于UDT的Reno和Vegas算法 [2 days]
+- 看完`Internet Congestion Control`第二章、第四章 [2 days] ✔
+- 看完UDT相关文档 [2 days] ✔
+- 实现基于UDT的Reno和Vegas算法 [2 days] 
 
 ### 1-5
 
@@ -31,3 +31,14 @@
 ### 1-12
 
 - 看完Vegas算法的程序实现 ✔
+
+## 1.13-1.17 目标
+
+- 在pantheon中部署udt仓库 [1 day] ✔
+- 用Latex开始写论文初稿，完成Introduction, Related Work部分 [2 day]
+- 总结为移动蜂窝网络设计的拥塞控制算法的思路，包括Sprout, verus, propRate, ExLL, C2TCP, DeepCC [2 day]
+
+### 1-13
+
+- 在pantheon中部署udt
+- 在udt中实现reno
