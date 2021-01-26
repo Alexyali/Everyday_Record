@@ -58,3 +58,21 @@
 - 整理项目需要的协议API ✔
 
 - 看完了`Robust Live 4K Video Streaming` ✔
+
+### 1-24
+
+- 改进了UDT的Vegas算法 ✔
+
+## 1.25 - 2.24
+
+- leetcode刷题100道
+- 完成论文
+  - RL入门
+  - 完成初稿
+  - 设计算法
+- 参加RTC比赛
+  - 配置环境
+
+### 1-26
+
+- 成功编译AlphaRTC
