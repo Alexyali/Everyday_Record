@@ -1,4 +1,4 @@
-## Makefile
+## CCMakefile
 
 - 基本规则
 
