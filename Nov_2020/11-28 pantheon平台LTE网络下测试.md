@@ -26,13 +26,13 @@ $ src/analysis/analyze.py --data-dir result/compare/LTE
 
 各算法吞吐量和延迟的汇总图如下，测试环境为模拟的移动LTE网络
 
-![1128_LTE_all](C:\Users\Alex\Documents\多媒体实验室\Everyday_Record\Nov_2020\1128_LTE_all.png)
+![1128_LTE_all](https://github.com/Alexyali/Everyday_Record/blob/master/Nov_2020/1128_LTE_all.png)
 
 在仿真LTE网络基础上加入3%的丢包率，再次实验，结果显示Srpout和BBR的表现较好，保证了高吞吐量的同时延迟也在100ms以下。
 
-![1128_LTE_loss](C:\Users\Alex\Documents\多媒体实验室\Everyday_Record\Nov_2020\1128_LTE_loss.png)
+![1128_LTE_loss](https://github.com/Alexyali/Everyday_Record/blob/master/Nov_2020/1128_LTE_loss.png)
 
 Sprout带宽测试结果如下图。结果显示该算法可以很快跟踪网络的带宽变化。
 
-![1128_LTE_Sprout](C:\Users\Alex\Documents\多媒体实验室\Everyday_Record\Nov_2020\1128_LTE_Sprout.png)
+![1128_LTE_Sprout](https://github.com/Alexyali/Everyday_Record/blob/master/Nov_2020/1128_LTE_Sprout.png)
 

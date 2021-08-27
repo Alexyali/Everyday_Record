@@ -25,7 +25,7 @@ Sprout需要估计现在以及未来的链路速率，未来预测可以安全�
 
 唯一需要实时推断的参数是λ，也就是变化的链路速率。
 
-![1](C:\Users\Alex\Documents\多媒体实验室\Everyday_Record\Dec_2020\12-14-model.PNG)
+![1](https://github.com/Alexyali/Everyday_Record/blob/master/Dec_2020/12-14-model.PNG)
 
 Sprout将速率λ可能的取值空间离散化为256个平均分布的离散值。从0-1000个MTU包每秒。每一个tick(20ms)执行一次推断更新过程。
 
