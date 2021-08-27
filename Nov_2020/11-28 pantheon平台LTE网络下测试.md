@@ -34,5 +34,5 @@ $ src/analysis/analyze.py --data-dir result/compare/LTE
 
 Sprout带宽测试结果如下图。结果显示该算法可以很快跟踪网络的带宽变化。
 
-![1128_LTE_Sprout](https://github.com/Alexyali/Everyday_Record/blob/master/1128_LTE_Sprout.png)
+![1128_LTE_Sprout](https://github.com/Alexyali/Everyday_Record/blob/master/Nov_2020/1128_LTE_Sprout.png)
 
