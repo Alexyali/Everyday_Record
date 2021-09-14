@@ -100,7 +100,7 @@ int main() {
 2. 存在虚函数的类有一个虚函数表，当创建对象时，该对象有一个虚表指针；
 3. 当基类指针指向派生类对象，调用虚函数时，实际指向派生类的虚表指针，找到相应的虚函数。
 
-![test](https://github.com/Alexyali/Everyday_Record/blob/master/Sep_2021/virtual_function.PNG)
+<img src="./virtual_function.PNG" alt="test" style="zoom:80%;" />
 
 
 
