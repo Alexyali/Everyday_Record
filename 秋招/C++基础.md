@@ -43,6 +43,54 @@ int main() {
 
 ## 类相关
 
+### 什么是多态
+
+多态是不同继承类的对象，对同一消息做出不同的响应。基类的指针指向或者绑定到派生类的对象，使得基类指针呈现出不同的表现方式。具体来说，在基类的函数前加`virtual`关键字，在派生类中重写该函数，运行时根据对象类型调用对应函数。
+
+实现方法：多态通过虚函数实现，一个类有虚函数表，里面保存了虚函数地址。虚函数表的地址保存在含有虚函数的类的实例对象的内存空间中。
+
+实现过程：
+
+1. 在类中用`virtual`关键词声明虚函数；
+2. 存在虚函数的类有一个虚函数表，当创建对象时，该对象有一个虚表指针；
+3. 当基类指针指向派生类对象，调用虚函数时，实际指向派生类的虚表指针，找到相应的虚函数。
+
+例子：
+
+```c++
+#include <iostream>
+using namespace std;
+
+class Base
+{
+public:
+	virtual void fun() { cout << "Base::fun()" << endl; }
+
+	virtual void fun1() { cout << "Base::fun1()" << endl; }
+
+	virtual void fun2() { cout << "Base::fun2()" << endl; }
+};
+class Derive : public Base
+{
+public:
+	void fun() { cout << "Derive::fun()" << endl; }
+
+	virtual void D_fun1() { cout << "Derive::D_fun1()" << endl; }
+
+	virtual void D_fun2() { cout << "Derive::D_fun2()" << endl; }
+};
+int main()
+{
+	Base *p = new Derive();
+	p->fun(); // Derive::fun() 调用派生类中的虚函数
+	return 0;
+}
+```
+
+从下图可以看出，如果派生类重写虚函数`fun()`，派生类虚函数表中没有`Base::fun()`，只有`Derive::fun()`。
+
+<img src="./virtual_function.PNG" alt="test" style="zoom:80%;" />
+
 ### 什么是虚函数和纯虚函数
 
 虚函数：被`virtual`关键字修饰的成员函数
@@ -88,19 +136,67 @@ int main() {
 - 虚表指针保存的位置：对象内存空间最前面，为了正确取到虚函数的偏移值
 - **虚函数表和类对应的，虚表指针是和对象对应**
 
-### 什么是多态
+### 单继承和多继承的虚函数表结构
 
-多态是不同继承类的对象，对同一消息做出不同的响应。基类的指针指向或者绑定到派生类的对象，使得基类指针呈现出不同的表现方式。具体来说，在基类的函数前加`virtual`关键字，在派生类中重写该函数，运行时根据对象类型调用对应函数。
+- 如果派生类没有重新定义基类虚函数A，那么派生类虚函数表中保存的是基类虚函数A的地址；
+- 如果派生类重写了基类的某个虚函数 B，则派生的虚函数表中保存的是重写后的虚函数 B 的地址；
+- 如果派生类重新定义了新的虚函数 C，派生类的虚函数表保存新的虚函数 C 的地址；
 
-实现方法：多态通过虚函数实现，一个类有虚函数表，里面保存了虚函数地址。虚函数表的地址保存在含有虚函数的类的实例对象的内存空间中。
+- 多继承有虚函数覆盖的话，派生类的虚函数表分为多个，每个表对应的虚函数A都是派生类改写的虚函数地址。
 
-实现过程：
+```c++
+#include <iostream>
+using namespace std;
 
-1. 在类中用`virtual`关键词声明虚函数；
-2. 存在虚函数的类有一个虚函数表，当创建对象时，该对象有一个虚表指针；
-3. 当基类指针指向派生类对象，调用虚函数时，实际指向派生类的虚表指针，找到相应的虚函数。
+class Base1
+{
+public:
+    virtual void fun1() { cout << "Base1::fun1()" << endl; }
+    virtual void B1_fun2() { cout << "Base1::B1_fun2()" << endl; }
+    virtual void B1_fun3() { cout << "Base1::B1_fun3()" << endl; }
+};
+class Base2
+{
+public:
+    virtual void fun1() { cout << "Base2::fun1()" << endl; }
+    virtual void B2_fun2() { cout << "Base2::B2_fun2()" << endl; }
+    virtual void B2_fun3() { cout << "Base2::B2_fun3()" << endl; }
+};
+class Base3
+{
+public:
+    virtual void fun1() { cout << "Base3::fun1()" << endl; }
+    virtual void B3_fun2() { cout << "Base3::B3_fun2()" << endl; }
+    virtual void B3_fun3() { cout << "Base3::B3_fun3()" << endl; }
+};
 
-<img src="./virtual_function.PNG" alt="test" style="zoom:80%;" />
+class Derive : public Base1, public Base2, public Base3
+{
+public:
+    virtual void fun1() { cout << "Derive::fun1()" << endl; }
+    virtual void D_fun2() { cout << "Derive::D_fun2()" << endl; }
+    virtual void D_fun3() { cout << "Derive::D_fun3()" << endl; }
+};
 
+int main(){
+    Base1 *p1 = new Derive();
+    Base2 *p2 = new Derive();
+    Base3 *p3 = new Derive();
+    p1->fun1(); // Derive::fun1()
+    p2->fun1(); // Derive::fun1()
+    p3->fun1(); // Derive::fun1()
+    return 0;
+}
 
+//作者：力扣 (LeetCode)
+//链接：https://leetcode-cn.com/leetbook/read/cpp-interview-highlights/efd81s/
+//来源：力扣（LeetCode）
+//著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+### 构造函数和析构函数是否需要定义为虚函数
+
+构造函数一般不定义为虚函数，因为如果这样定义，那么在调用构造函数实例化对象时，需要访问该对象的内存空间，通过虚表指针调用虚构造函数；但是此时对象还未创建，无法调用虚表指针。因此不能定义构造函数为虚函数。
+
+析构函数一般定义为虚函数，为了防止内存泄漏。当基类的指针或者引用绑定到派生类的对象时，如果未将基类析构函数定义为虚函数，那么只会调用基类的析构函数，无法释放派生类的内存空间，导致内存泄漏。
 
